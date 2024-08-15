@@ -26,10 +26,10 @@ public class Spawner : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(GetEnemy());
+        StartCoroutine(SpawnEnemy());
     }
 
-    private IEnumerator GetEnemy()
+    private IEnumerator SpawnEnemy()
     {
         var wait = new WaitForSeconds(_repeatRate);
 
@@ -46,7 +46,7 @@ public class Spawner : MonoBehaviour
         enemy.Died += SendToPool;
 
         enemy.transform.position = SetSpawnPoint();
-        enemy.GetDirection(SetDirection());
+        enemy.SetDirection(GetDirection());
         enemy.gameObject.SetActive(true);
     }
 
@@ -58,7 +58,7 @@ public class Spawner : MonoBehaviour
         return _spawnPoints[spawnPoint].transform.position;
     }
 
-    private Vector3 SetDirection()
+    private Vector3 GetDirection()
     {
         float minDegrees = 0f;
         float maxDegrees = 360f;

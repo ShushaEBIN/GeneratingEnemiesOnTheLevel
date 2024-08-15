@@ -11,11 +11,6 @@ public class Enemy : MonoBehaviour
 
     public event Action<Enemy> Died;
 
-    public void GetDirection(Vector3 direction)
-    {
-        _direction = direction;
-    }
-
     private void OnEnable()
     {
         StartCoroutine();
@@ -25,6 +20,11 @@ public class Enemy : MonoBehaviour
     {
         transform.Translate(_direction * _speed * Time.deltaTime);
     }
+
+    public void SetDirection(Vector3 direction)
+    {
+        _direction = direction;
+    }   
 
     private void StartCoroutine()
     {
