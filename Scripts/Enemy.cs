@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _timeOfLife = 5f;
 
     private Vector3 _direction;
-    private Coroutine _coroutine;
 
     public event Action<Enemy> Died;
 
