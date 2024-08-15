@@ -7,25 +7,24 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float _speed = 4f;
     [SerializeField] private float _timeOfLife = 5f;
 
-    private bool _isCounting = false;
+    private Vector3 _direction;
+    private Coroutine _coroutine;
 
     public event Action<Enemy> Died;
 
-    public void Reset()
+    public void GetDirection(Vector3 direction)
     {
-        _isCounting = false;
+        _direction = direction;
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine();
     }
 
     private void Update()
     {
-        if (_isCounting == false)
-        {
-            _isCounting = true;
-
-            StartCoroutine();
-        }
-
-        transform.Translate(Vector3.forward * _speed * Time.deltaTime);
+        transform.Translate(_direction * _speed * Time.deltaTime);
     }
 
     private void StartCoroutine()
@@ -36,7 +35,7 @@ public class Enemy : MonoBehaviour
     private IEnumerator Count()
     {
         yield return new WaitForSeconds(_timeOfLife);
-        
+
         Died?.Invoke(this);
     }
 }

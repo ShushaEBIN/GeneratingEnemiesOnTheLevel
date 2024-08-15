@@ -46,8 +46,7 @@ public class Spawner : MonoBehaviour
         enemy.Died += SendToPool;
 
         enemy.transform.position = SetSpawnPoint();
-        enemy.transform.rotation = GetRandomRotation();
-        enemy.Reset();
+        enemy.GetDirection(SetDirection());
         enemy.gameObject.SetActive(true);
     }
 
@@ -59,12 +58,13 @@ public class Spawner : MonoBehaviour
         return _spawnPoints[spawnPoint].transform.position;
     }
 
-    private Quaternion GetRandomRotation()
+    private Vector3 SetDirection()
     {
         float minDegrees = 0f;
         float maxDegrees = 360f;
+        float randomAngle = Random.Range(minDegrees, maxDegrees);
 
-        return Quaternion.Euler(minDegrees, Random.Range(minDegrees, maxDegrees), minDegrees);
+        return new Vector3(Mathf.Cos(randomAngle), minDegrees, Mathf.Sin(randomAngle));
     }
 
     private void SendToPool(Enemy enemy)
