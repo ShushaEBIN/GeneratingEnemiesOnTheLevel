@@ -1,40 +1,29 @@
 using System;
-using System.Collections;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _speed = 4f;
-    [SerializeField] private float _timeOfLife = 5f;
 
-    private Vector3 _direction;
+    private Transform _target;
 
     public event Action<Enemy> Died;
 
-    private void OnEnable()
-    {
-        StartCoroutine();
-    }
-
     private void Update()
     {
-        transform.Translate(_direction * _speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _target.position, _speed * Time.deltaTime);
+    }    
+
+    private void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.TryGetComponent<Hero>(out Hero component))
+        {
+            Died?.Invoke(this);
+        }
     }
 
-    public void SetDirection(Vector3 direction)
+    public void SetTarget(Transform target)
     {
-        _direction = direction;
-    }   
-
-    private void StartCoroutine()
-    {
-        StartCoroutine(Count());
-    }
-
-    private IEnumerator Count()
-    {
-        yield return new WaitForSeconds(_timeOfLife);
-
-        Died?.Invoke(this);
+        _target = target;
     }
 }

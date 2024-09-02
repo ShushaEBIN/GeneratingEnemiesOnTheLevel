@@ -4,16 +4,20 @@ using UnityEngine.Pool;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private Enemy _prefab;
-    [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private SpawnPoint[] _spawnPoints;
     [SerializeField] private float _repeatRate;
     [SerializeField] private int _poolCapacity = 10;
     [SerializeField] private int _poolMaxCapacity = 10;
 
     private ObjectPool<Enemy> _pool;
+    private SpawnPoint _spawnPoint;
+    private Enemy _prefab;
 
     private void Awake()
     {
+        SetSpawnPoint();
+        _prefab = _spawnPoint.Enemy;
+
         _pool = new ObjectPool<Enemy>(
         createFunc: () => Instantiate(_prefab),
         actionOnGet: (enemy) => SetParameters(enemy),
@@ -45,26 +49,19 @@ public class Spawner : MonoBehaviour
     {
         enemy.Died += SendToPool;
 
-        enemy.transform.position = SetSpawnPoint();
-        enemy.SetDirection(GetDirection());
+        SetSpawnPoint();
+        _prefab = _spawnPoint.Enemy;
+        enemy.transform.position = _spawnPoint.transform.position;
+        enemy.SetTarget(_spawnPoint.Target);
         enemy.gameObject.SetActive(true);
     }
 
-    private Vector3 SetSpawnPoint()
+    private void SetSpawnPoint()
     {
         int firstSpawnPoint = 0;
         int spawnPoint = Random.Range(firstSpawnPoint, _spawnPoints.Length);
 
-        return _spawnPoints[spawnPoint].transform.position;
-    }
-
-    private Vector3 GetDirection()
-    {
-        float minDegrees = 0f;
-        float maxDegrees = 360f;
-        float randomAngle = Random.Range(minDegrees, maxDegrees);
-
-        return new Vector3(Mathf.Cos(randomAngle), minDegrees, Mathf.Sin(randomAngle));
+        _spawnPoint = _spawnPoints[spawnPoint];
     }
 
     private void SendToPool(Enemy enemy)
