@@ -1194,7 +1194,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 81584177}
-  _enemy: {fileID: 8361460977573639353, guid: 83dab506297948d4d8d34c4fe12431ee, type: 3}
+  _prefab: {fileID: 8361460977573639353, guid: 83dab506297948d4d8d34c4fe12431ee, type: 3}
+  _repeatRate: 1.5
+  _poolCapacity: 10
+  _poolMaxCapacity: 10
 --- !u!1001 &116386024
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9197,7 +9200,6 @@ GameObject:
   - component: {fileID: 1682868219}
   - component: {fileID: 1682868218}
   - component: {fileID: 1682868217}
-  - component: {fileID: 1682868216}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -9205,25 +9207,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1682868216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1682868215}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e1bb4b6cdde42447960efc1a5b6b8b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawnPoints:
-  - {fileID: 1708028646}
-  - {fileID: 1693691645}
-  - {fileID: 115123835}
-  _repeatRate: 0.5
-  _poolCapacity: 5
-  _poolMaxCapacity: 10
 --- !u!81 &1682868217
 AudioListener:
   m_ObjectHideFlags: 0
@@ -9343,7 +9326,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 262273848}
-  _enemy: {fileID: -5135984702720617485, guid: 4198e2587d1fcca4cb87c16c3cfed34d, type: 3}
+  _prefab: {fileID: -5135984702720617485, guid: 4198e2587d1fcca4cb87c16c3cfed34d, type: 3}
+  _repeatRate: 2
+  _poolCapacity: 10
+  _poolMaxCapacity: 10
 --- !u!1001 &1706884954
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9455,7 +9441,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1077467292}
-  _enemy: {fileID: 4691152180023310715, guid: 773e4215c2d37174bb8039a9e503724e, type: 3}
+  _prefab: {fileID: 4691152180023310715, guid: 773e4215c2d37174bb8039a9e503724e, type: 3}
+  _repeatRate: 1
+  _poolCapacity: 10
+  _poolMaxCapacity: 10
 --- !u!1 &1719826025
 GameObject:
   m_ObjectHideFlags: 0

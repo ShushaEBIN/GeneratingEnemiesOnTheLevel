@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.TryGetComponent<Hero>(out Hero component))
+        if (collider.gameObject.TryGetComponent<Hero>(out Hero _target))
         {
             Died?.Invoke(this);
         }
